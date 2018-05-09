@@ -72,9 +72,9 @@ E+=../shlr/grub/libgrubfs.${EXT_AR}
 E+=../shlr/windbg/libr_windbg.${EXT_AR}
 E+=../shlr/qnx/lib/libqnxr.${EXT_AR}
 E+=../shlr/bochs/lib/libbochs.${EXT_AR}
-ifneq ($(OSTYPE),android)
-E+=../shlr/sdb/src/libsdb.${EXT_AR}
-endif
+#ifneq ($(OSTYPE),android)
+#E+=../shlr/sdb/src/libsdb.${EXT_AR}
+#endif
 
 libr.${EXT_SO}: .libr
 	$(CC) -fvisibility=hidden $(MLFLAGS) -shared -dynamiclib -o libr.${EXT_SO}  \
