@@ -6,6 +6,7 @@ include ../mk/${COMPILER}.mk
 
 DESTDIR:=$(DESTDIR)
 PREFIX?=${PWD}/../prefix
+OBJCOPY?=objcopy
 
 S=$
 B=`
@@ -56,8 +57,11 @@ endif
 	for LIB in $^ ; do \
 		${PARTIALLD} $(PLFLAGS) -o .libr/$$(basename $${LIB} .a).o $${LIB} ; \
 	done
-ifeq ($(BUILD_OS),linux)
-	for LIB in .libr/* ; do objcopy --localize-hidden $$LIB ; done
+ifeq ($(OSTYPE),linux)
+	for LIB in .libr/* ; do $(OBJCOPY) --localize-hidden $$LIB ; done
+endif
+ifeq ($(OSTYPE),android)
+	for LIB in .libr/* ; do $(OBJCOPY) --localize-hidden $$LIB ; done
 endif
 
 libr.${EXT_AR}: .libr
