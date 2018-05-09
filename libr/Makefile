@@ -67,15 +67,20 @@ endif
 libr.${EXT_AR}: .libr
 	${AR} crs $@ .libr/*.o
 
+E=../shlr/sdb/src/libsdb.${EXT_AR}
+E+=../shlr/ar/libr_ar.${EXT_AR}
+E+=../shlr/grub/libgrubfs.${EXT_AR}
+E+=../shlr/windbg/libr_windbg.${EXT_AR}
+E+=../shlr/qnx/lib/libqnxr.${EXT_AR}
+E+=../shlr/bochs/lib/libbochs.${EXT_AR}
+
 libr.${EXT_SO}: .libr
 	$(CC) -fvisibility=hidden $(MLFLAGS) -shared -dynamiclib -o libr.${EXT_SO}  \
 		.libr/*.o \
 		../shlr/gdb/lib/libgdbr.${EXT_AR} ../shlr/java/libr_java.${EXT_AR} \
 		../shlr/zip/librz.${EXT_AR} \
-		../shlr/sdb/src/libsdb.${EXT_AR} \
-		../shlr/libr_shlr.${EXT_AR}  \
+		../shlr/libr_shlr.${EXT_AR} $(E)\
 		../shlr/capstone/libcapstone.${EXT_AR}
-	# ../shlr/grub/libgrubfs.${EXT_AR}
 
 else
 
