@@ -39,14 +39,14 @@ BUILD_MERGED=yes
 
 ifeq ($(BUILD_MERGED),yes)
 
-ifeq ($(BUILD_OS),darwin)
+ifeq ($(OSTYPE),darwin)
 MLFLAGS+=-install_name @rpath/libr2.dylib $(LDFLAGS)
 endif
-ifeq ($(BUILD_OS),ios)
+ifeq ($(OSTYPE),ios)
 MLFLAGS+=-install_name @rpath/libr2.dylib $(LDFLAGS)
 endif
 # XXX version-script only works with shlib as output
-#ifeq ($(BUILD_OS),linux)
+#ifeq ($(OSTYPE),linux)
 #PLFLAGS+=--version-script ./ld.script
 #endif
 
